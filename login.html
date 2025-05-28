@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Login - Ovista Mini Super Mart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+  <header>
+    <h1><a href="index.html" class="logo-link">Mini Super Mart</a></h1>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search products..." aria-label="Search products">
+      <button id="searchBtn" aria-label="Search">🔍</button>
+    </div>
+    <nav>
+      <a href="signup.html" class="auth-link">Sign Up</a>
+      <button id="cartBtn" aria-label="Open shopping cart">
+        🛒<span class="cart-count" id="cartCount" aria-live="polite">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>Login to Your Account</h2>
+        <p>Welcome back! Please enter your details</p>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <div class="form-tabs">
+          <button type="button" class="tab-btn active" data-tab="phone">Phone</button>
+          <button type="button" class="tab-btn" data-tab="email">Email</button>
+        </div>
+
+        <div class="tab-content active" id="phoneTab">
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <div class="phone-input-container">
+              <div class="country-code">+880</div>
+              <input type="tel" id="phone" placeholder="1XXXXXXXXX" pattern="1[0-9]{9}" maxlength="10" required>
+            </div>
+            <div class="input-hint">Enter 10 digits (starting with 1)</div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="emailTab">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="example@email.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-input-container">
+            <input type="password" id="password" placeholder="Enter your password" required>
+            <button type="button" class="toggle-password" aria-label="Toggle password visibility">👁️</button>
+          </div>
+        </div>
+
+        <div class="form-options">
+          <div class="remember-me">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember me</label>
+          </div>
+          <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="auth-btn">Login</button>
+
+        <div class="social-login">
+          <p>Or continue with</p>
+          <div class="social-buttons">
+            <button type="button" class="social-btn google">
+              <img src="https://cdn.cdnlogo.com/logos/g/35/google-icon.svg" alt="Google">
+              Google
+            </button>
+            <button type="button" class="social-btn facebook">
+              <img src="https://cdn.cdnlogo.com/logos/f/91/facebook-icon.svg" alt="Facebook">
+              Facebook
+            </button>
+          </div>
+        </div>
+
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <p>Darululum More, Old Babu Para</p>
+        <p>Saidpur, Nilphamari</p>
+        <p>Phone: 01883786892</p>
+        <p>Email: ovibiswas45@gmail.com</p>
+      </div>
+      <div class="footer-col">
+        <h4>Business Hours</h4>
+        <p>Open Every Day</p>
+        <p>8:00 AM – 10:00 PM</p>
+      </div>
+      <div class="footer-col">
+        <h4>Connect With Us</h4>
+        <p>Follow us on social media</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">📱</a>
+          <a href="#" aria-label="WhatsApp">📞</a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2025 Ovi Traders & Mini Super Mart. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Tab switching functionality
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all tabs
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+
+        // Add active class to current tab
+        btn.classList.add('active');
+        document.getElementById(`${btn.dataset.tab}Tab`).classList.add('active');
+      });
+    });
+
+    // Password visibility toggle
+    const togglePasswordBtn = document.querySelector('.toggle-password');
+    const passwordInput = document.getElementById('password');
+
+    togglePasswordBtn.addEventListener('click', () => {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        togglePasswordBtn.textContent = '🔒';
+      } else {
+        passwordInput.type = 'password';
+        togglePasswordBtn.textContent = '👁️';
+      }
+    });
+
+    // Form submission
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Get active tab
+      const activeTab = document.querySelector('.tab-btn.active').dataset.tab;
+      
+      let identifier;
+      if (activeTab === 'phone') {
+        identifier = `+880${document.getElementById('phone').value}`;
+      } else {
+        identifier = document.getElementById('email').value;
+      }
+      
+      const password = document.getElementById('password').value;
+      const rememberMe = document.getElementById('remember').checked;
+      
+      // Here you would normally send this data to your backend
+      console.log('Login attempt:', { identifier, password, rememberMe });
+      
+      // For demo purposes, show success and redirect
+      alert('Login successful!');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

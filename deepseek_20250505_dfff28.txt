@@ -1,0 +1,6 @@
+ovista-mini-mart/
+├── index.html
+├── css/
+│   └── style.css
+└── js/
+    └── script.js

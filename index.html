@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Ovista Mini Super Mart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+  <h1>Mini Super Mart</h1>
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search products..." aria-label="Search products">
+    <button id="searchBtn" aria-label="Search">🔍</button>
+  </div>
+  
+  <nav>
+
+     <!-- New Categories Button -->
+    <button class="owner-btn" aria-label="Browse Categories">
+      <span class="profile-icon">📋</span>
+      <a href="category.html" class="auth-link">Categories</a>
+    </button>
+    
+
+    <button id="ownerProfileBtn" class="owner-btn" aria-label="Owner Profile">
+      <span class="profile-icon">👤</span>
+      <span>About Owner</span>
+    </button>
+    
+    <!-- Login Button -->
+    <button id="loginBtn" class="owner-btn" aria-label="Login or Sign Up">
+      <span class="profile-icon">📲</span>
+      <a href="login.html" class="auth-link">Login</a>
+    </button>
+
+    <!-- Contact Us Button -->
+    <button id="contactBtn" class="owner-btn" aria-label="Contact Us">
+      <span class="profile-icon">📞</span>
+    </button>
+    
+    <!-- Cart Button -->
+    <button id="cartBtn" aria-label="Open shopping cart">
+      🛒<span class="cart-count" id="cartCount" aria-live="polite">0</span>
+    </button>
+  </nav>
+</header>
+
+
+  <div class="modal-overlay" id="ownerModal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-labelledby="profileTitle">
+      <button class="modal-close" id="closeModalBtn" aria-label="Close modal">&times;</button>
+      
+      <div class="profile-header">
+        <img src="owner.jpg" alt="Owner Image" class="owner-image">
+        <h2 id="profileTitle" class="profile-title">OVI BISWAS</h2>
+        <p class="profile-subtitle">EXCLUSIVE PERSONAL & BUSINESS PROFILE</p>
+      </div>
+      
+      
+      <div class="profile-section">
+        <h4><span class="icon">👨‍💼</span>Visionary Entrepreneur</h4>
+        <p class="profile-quote">"Global in ambition, rooted in tradition."</p>
+      </div>
+      
+      <div class="profile-section">
+        <h4><span class="icon">👤</span>PERSONAL SNAPSHOT</h4>
+        <div class="profile-item">
+          <strong>Age:</strong> 29
+        </div>
+        <div class="profile-item">
+          <strong>Residence:</strong> Saidpur, Bangladesh
+        </div>
+        <div class="profile-item">
+          <strong>Languages:</strong> Bengali (Native), English (Fluent), Hindi (Conversational)
+        </div>
+        <div class="profile-item">
+          <strong>Diet:</strong> Non-Vegetarian
+        </div>
+        <div class="profile-item">
+          <strong>Habits:</strong> Fitness-oriented
+        </div>
+      </div>
+      
+      <div class="profile-section">
+        <h4><span class="icon">🎓</span>EDUCATION & SKILLS</h4>
+        <div class="profile-item">
+          <strong>Education:</strong> BSc in Marine Science, MSc in Aquaculture - University of Chittagong
+        </div>
+        <div class="profile-item">
+          <strong>Key Skills:</strong> Leadership in International Commerce, Cross-cultural communication, Strategic planning
+        </div>
+        <p class="profile-quote">"Think globally, act locally."</p>
+      </div>
+      
+      <div class="profile-section">
+        <h4><span class="icon">🏢</span>BUSINESS EMPIRE</h4>
+        <div class="profile-item">
+          <strong>Ovi Group:</strong> Conglomerate Founder: Established & growing business
+        </div>
+        <div class="profile-item">
+          <strong>Global Expansion:</strong> Scaling strategically in Bangladesh and beyond
+        </div>
+        <div class="profile-item">
+          <strong>Core Ventures:</strong> Retail, energy, fintech, and agribusiness
+        </div>
+        <p class="profile-quote">"I don't follow trends - I set them."</p>
+      </div>
+      
+      <div class="profile-section">
+        <h4><span class="icon">🌟</span>LIFESTYLE & VALUES</h4>
+        <div class="profile-item">
+          <strong>Constant Learner:</strong> Studies international markets and cultures
+        </div>
+        <div class="profile-item">
+          <strong>Cultural Enthusiast:</strong> Passionate about art, music, travel
+        </div>
+        <div class="profile-item">
+          <strong>Balanced Life:</strong> Enjoys family, community, fitness
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <section class="hero" role="banner" aria-label="Featured Promotion">
+    <div class="banner-container">
+      <div class="banner-slider">
+        <div class="banner-slide active">
+          <div class="banner-content">
+            <h2>Smart Choices, Better Business</h2>
+            <p>Your one-stop destination for retail goods, digital services & more</p>
+            <button id="shopNowBtn" aria-label="Explore Our Services">Explore Our Services</button>
+          </div>
+          <div class="banner-overlay"></div>
+        </div>
+        <div class="banner-slide">
+          <div class="banner-content">
+            <h2>Fresh Products Daily</h2>
+            <p>Quality guaranteed with every purchase</p>
+            <button class="shop-banner-btn" aria-label="Shop Now">Shop Now</button>
+          </div>
+          <div class="banner-overlay"></div>
+        </div>
+        <div class="banner-slide" style="background-image: url('cover.jpg');">
+          <div class="banner-content">
+              <h2>Fresh Products Daily</h2>
+              <p>Quality guaranteed with every purchase</p>
+              <button class="shop-banner-btn">Shop Now</button>
+          </div>
+          <div class="banner-overlay"></div>
+      </div>
+      
+      </div>
+      <div class="banner-controls">
+        <button class="banner-nav prev" aria-label="Previous banner">&lt;</button>
+        <div class="banner-dots">
+          <span class="dot active" data-slide="0"></span>
+          <span class="dot" data-slide="1"></span>
+          <span class="dot" data-slide="2"></span>
+        </div>
+        <button class="banner-nav next" aria-label="Next banner">&gt;</button>
+      </div>
+    </div>
+  </section>
+
+
+  
+  <div class="search-results" id="searchResults">
+    <h3 class="search-title">
+      Search Results <span class="search-count" id="searchCount"></span>
+      <button class="clear-search" id="clearSearch">Clear</button>
+    </h3>
+    <div class="products-grid" id="searchResultsGrid"></div>
+  </div>
+  
+  <main>
+  <h3 class="section-title">Our Services</h3>
+  <div class="services-grid" aria-live="polite" aria-atomic="true">
+    <div class="service-card">
+      <div class="icon">🛒</div>
+      <h4 class="service-name">Retail Goods</h4>
+      <p class="service-description">Quality packaged foods, beverages, ice cream, toys & stationery. All your daily essentials in one place.</p>
+    </div>
+  
+
+<div class="container">
+    <div class="service-card" id="mobile-banking-card">
+      <div class="icon">📱</div>
+      <h4 class="service-name">Mobile Banking</h4>
+      <p class="service-description">Bkash, Nagad, and mobile recharge services. Cash in/out and bill payments available.</p>
+    </div>
+  </div>
+  
+  <div class="modal" id="banking-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3 class="modal-title">Mobile Banking Agent Numbers</h3>
+      <div class="banking-info">
+        <div class="banking-service">
+          <div class="service-logo bkash">B</div>
+          <div class="service-details">
+            <h4>Bkash</h4>
+            <p>01883786892</p>
+          </div>
+          <button class="copy-btn" data-number="01883786892">
+            <i class="fas fa-copy"></i>
+          </button>
+        </div>
+        
+        <div class="banking-service">
+          <div class="service-logo nagad">N</div>
+          <div class="service-details">
+            <h4>Nagad</h4>
+            <p>01782573325</p>
+          </div>
+          <button class="copy-btn" data-number="01782573325">
+            <i class="fas fa-copy"></i>
+          </button>
+        </div>
+        
+        <div class="banking-service">
+          <div class="service-logo rocket">R</div>
+          <div class="service-details">
+            <h4>Rocket</h4>
+            <p>018837868923</p>
+          </div>
+          <button class="copy-btn" data-number="01883786892">
+            <i class="fas fa-copy"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="copy-notification" id="copy-notification">
+    Number copied to clipboard!
+  </div>
+
+    <div class="service-card">
+      <div class="icon">🔥</div>
+      <h4 class="service-name">Gas Cylinder</h4>
+      <p class="service-description">Trusted gas brands with convenient home delivery for residential and commercial use.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">🚀</div>
+      <h4 class="service-name">Coming Soon</h4>
+      <p class="service-description">Grocery wholesale, organic food from our farm, and an e-commerce platform for expanded services.</p>
+    </div>
+  </div>
+  
+  <!-- Add a Browse Categories button -->
+  <div class="browse-categories-container">
+    <a href="category.html" class="browse-categories-btn">Browse All Categories</a>
+  </div>
+  
+  <h3 class="section-title">Featured Products</h3>
+  <div class="products-grid" id="productsGrid" aria-live="polite" aria-atomic="true">
+    <!-- Products will be inserted here by JS -->
+  </div>
+  
+  <!-- 3. Add a "See all products" link after featured products -->
+  <div class="see-all-container">
+    <a href="category.html" class="see-all-link">See all products →</a>
+  </div>
+  
+  <section class="about-section">
+    <h3 class="section-title">Why Choose Us?</h3>
+    
+    <div class="features-list">
+      <div class="feature-item">
+        <div class="icon">✓</div>
+        <p>Hygienically Packaged Products</p>
+      </div>
+      <div class="feature-item">
+        <div class="icon">✓</div>
+        <p>Fast & Friendly Service</p>
+      </div>
+      <div class="feature-item">
+        <div class="icon">✓</div>
+        <p>CCTV-Secured Business</p>
+      </div>
+      <div class="feature-item">
+        <div class="icon">✓</div>
+        <p>Visionary Entrepreneur & Team</p>
+      </div>
+    </div>
+  </section>
+</main>
+  
+  <aside class="cart-sidebar" id="cartSidebar" aria-label="Shopping cart" aria-hidden="true">
+    <button class="close-cart-btn" id="closeCartBtn" aria-label="Close shopping cart">Close &times;</button>
+    <h3>Your Cart</h3>
+    <div class="cart-items" id="cartItems" tabindex="0" aria-live="polite" aria-atomic="true">
+      <p>Your cart is empty.</p>
+    </div>
+    <div class="cart-summary" id="cartTotal">
+      Total: ৳0.00
+    </div>
+  </aside>
+
+  
+  
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <p>Darululum More, Old Babu Para</p>
+        <p>Saidpur, Nilphamari</p>
+        <p>Phone: 01883786892</p>
+        <p>Email: ovibiswas45@gmail.com</p>
+      </div>
+      <div class="footer-col">
+        <h4>Business Hours</h4>
+        <p>Open Every Day</p>
+        <p>8:00 AM – 10:00 PM</p>
+      </div>
+      <div class="footer-col">
+        <h4>Connect With Us</h4>
+        <p>Follow us on social media</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">📱</a>
+          <a href="#" aria-label="WhatsApp">📞</a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2025 Ovi Traders & Mini Super Mart. All rights reserved.
+    </div>
+  </footer>
+  
+  <script>
+    const products = [
+    {
+      id: 1,
+      name: "Pran Chips",
+      price: 25,
+      image: "https://images.pexels.com/photos/13060679/pexels-photo-13060679.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      id: 2,
+      name: "Pepsi (500ml)",
+      price: 35,
+      image: "https://images.pexels.com/photos/1292294/pexels-photo-1292294.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    },
+    {
+      id: 3,
+      name: "Igloo Ice Cream",
+      price: 120,
+      image: "https://images.pexels.com/photos/632470/pexels-photo-632470.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      id: 4,
+      name: "Dairy Milk Chocolate",
+      price: 50,
+      image: "https://images.pexels.com/photos/1586942/pexels-photo-1586942.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      id: 5,
+      name: "Kitkat Chocolate",
+      price: 45,
+      image: "https://images.pexels.com/photos/65882/chocolate-dark-coffee-confiserie-65882.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      id: 6,
+      name: "Coca Cola (1L)",
+      price: 70,
+      image: "https://images.pexels.com/photos/2983100/pexels-photo-2983100.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      id: 7,
+      name: "Lays Potato Chips",
+      price: 30,
+      image: "https://images.pexels.com/photos/542607/pexels-photo-542607.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      id: 8,
+      name: "Maggi Noodles",
+      price: 18,
+      image: "https://images.pexels.com/photos/5908255/pexels-photo-5908255.jpeg?auto=compress&cs=tinysrgb&w=600"
+    }
+  ];
+  
+  
+    const productsGrid = document.getElementById("productsGrid");
+    const cartSidebar = document.getElementById("cartSidebar");
+    const cartBtn = document.getElementById("cartBtn");
+    const closeCartBtn = document.getElementById("closeCartBtn");
+    const cartItemsContainer = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    const cartCount = document.getElementById("cartCount");
+    const ownerProfileBtn = document.getElementById("ownerProfileBtn");
+    const ownerModal = document.getElementById("ownerModal");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+  
+    let cart = [];
+  
+    function renderProducts() {
+      productsGrid.innerHTML = "";
+      products.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <div class="product-info">
+            <h4 class="product-name">${product.name}</h4>
+            <p class="product-price">৳${product.price}</p>
+            <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
+          </div>
+        `;
+        productsGrid.appendChild(card);
+      });
+  
+      document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          const id = parseInt(button.dataset.id);
+          addToCart(id);
+        });
+      });
+    }
+  
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+      updateCart();
+    }
+  
+    function updateCart() {
+      cartItemsContainer.innerHTML = "";
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+      } else {
+        cart.forEach(item => {
+          const itemDiv = document.createElement("div");
+          itemDiv.className = "cart-item";
+          itemDiv.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-info">
+              <p class="cart-item-name">${item.name}</p>
+              <p class="cart-item-qty">Quantity: ${item.qty}</p>
+            </div>
+            <p class="cart-item-price">৳${item.price * item.qty}</p>
+            <button class="remove-btn" data-id="${item.id}">&times;</button>
+          `;
+          cartItemsContainer.appendChild(itemDiv);
+        });
+  
+        document.querySelectorAll(".remove-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const id = parseInt(btn.dataset.id);
+            removeFromCart(id);
+          });
+        });
+      }
+  
+      const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      cartTotal.textContent = `Total: ৳${total.toFixed(2)}`;
+      cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+    }
+  
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      updateCart();
+    }
+  
+    cartBtn.addEventListener("click", () => {
+      cartSidebar.classList.add("open");
+      cartSidebar.setAttribute("aria-hidden", "false");
+    });
+  
+    closeCartBtn.addEventListener("click", () => {
+      cartSidebar.classList.remove("open");
+      cartSidebar.setAttribute("aria-hidden", "true");
+    });
+  
+    // Owner profile modal handling
+    ownerProfileBtn.addEventListener("click", () => {
+      ownerModal.classList.add("open");
+      ownerModal.setAttribute("aria-hidden", "false");
+    });
+  
+    closeModalBtn.addEventListener("click", () => {
+      ownerModal.classList.remove("open");
+      ownerModal.setAttribute("aria-hidden", "true");
+    });
+  
+    // Close modal when clicking outside
+    ownerModal.addEventListener("click", (e) => {
+      if (e.target === ownerModal) {
+        ownerModal.classList.remove("open");
+        ownerModal.setAttribute("aria-hidden", "true");
+      }
+    });
+  
+    // Close modal with escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && ownerModal.classList.contains("open")) {
+        ownerModal.classList.remove("open");
+        ownerModal.setAttribute("aria-hidden", "true");
+      }
+    });
+
+    document.getElementById('mobile-banking-card').addEventListener('click', () => {
+      document.getElementById('banking-modal').style.display = 'flex';
+    });
+    
+    document.querySelector('.close-modal').addEventListener('click', () => {
+      document.getElementById('banking-modal').style.display = 'none';
+    });
+    
+    window.addEventListener('click', (event) => {
+      const modal = document.getElementById('banking-modal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+    
+    document.querySelectorAll('.copy-btn').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const number = button.getAttribute('data-number');
+        
+        navigator.clipboard.writeText(number)
+          .then(() => {
+            const notification = document.getElementById('copy-notification');
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+              notification.classList.remove('show');
+            }, 2000);
+          })
+          .catch(err => {
+            console.error('Failed to copy: ', err);
+          });
+      });
+    });
+  
+    // Banner slider functionality
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.banner-slide');
+  const dots = document.querySelectorAll('.dot');
+  const totalSlides = slides.length;
+  
+  function showSlide(index) {
+    // Hide all slides
+    slides.forEach(slide => {
+      slide.classList.remove('active');
+    });
+    
+    // Update dots
+    dots.forEach(dot => {
+      dot.classList.remove('active');
+    });
+    
+    // Show current slide and dot
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+    currentSlide = index;
+  }
+  
+  // Next slide function
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+  }
+  
+  // Previous slide function
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+  }
+  
+  // Set up event listeners
+  document.querySelector('.banner-nav.next').addEventListener('click', nextSlide);
+  document.querySelector('.banner-nav.prev').addEventListener('click', prevSlide);
+  
+  // Set up dot navigation
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      showSlide(index);
+    });
+  });
+  
+  // Auto-advance slides every 5 seconds
+  setInterval(nextSlide, 5000);
+  
+  // Search functionality
+  const searchInput = document.getElementById("searchInput");
+  const searchBtn = document.getElementById("searchBtn");
+  const searchResults = document.getElementById("searchResults");
+  const searchResultsGrid = document.getElementById("searchResultsGrid");
+  const searchCount = document.getElementById("searchCount");
+  const clearSearch = document.getElementById("clearSearch");
+  
+  function performSearch() {
+    const query = searchInput.value.trim().toLowerCase();
+    
+    if (query === "") {
+      searchResults.classList.remove("active");
+      return;
+    }
+    
+    const results = products.filter(product => 
+      product.name.toLowerCase().includes(query) || 
+      product.price.toString().includes(query)
+    );
+    
+    // Display results
+    searchResultsGrid.innerHTML = "";
+    
+    if (results.length === 0) {
+      searchResultsGrid.innerHTML = `
+        <div class="no-results">
+          <p>No products found matching "${searchInput.value}"</p>
+        </div>
+      `;
+    } else {
+      results.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <div class="product-info">
+            <h4 class="product-name">${product.name}</h4>
+            <p class="product-price">৳${product.price}</p>
+            <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
+          </div>
+        `;
+        searchResultsGrid.appendChild(card);
+      });
+      
+      // Re-attach event listeners for the Add to Cart buttons
+      searchResultsGrid.querySelectorAll(".add-to-cart-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          const id = parseInt(button.dataset.id);
+          addToCart(id);
+        });
+      });
+    }
+    
+    // Update count and show results
+    searchCount.textContent = `(${results.length} ${results.length === 1 ? 'product' : 'products'} found)`;
+    searchResults.classList.add("active");
+    
+    // Scroll to search results
+    searchResults.scrollIntoView({ behavior: 'smooth' });
+  }
+  
+  // Event listeners for search
+  searchBtn.addEventListener("click", performSearch);
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      performSearch();
+    }
+  });
+  
+  // Clear search
+  clearSearch.addEventListener("click", () => {
+    searchInput.value = "";
+    searchResults.classList.remove("active");
+  });
+  
+  // Make search bar stick on mobile when scrolling
+  window.addEventListener("scroll", () => {
+    const header = document.querySelector("header");
+    if (window.scrollY > 50) {
+      header.style.boxShadow = "0 5px 15px rgba(0,0,0,0.1)";
+    } else {
+      header.style.boxShadow = "none";
+    }
+  });
+  
+
+  // JavaScript to handle Contact Us button (Opens WhatsApp or Email Modal)
+document.getElementById('contactBtn').addEventListener('click', function() {
+  // Contact message with links for WhatsApp and Email
+  const contactMessage = `
+    <div class="profile-header">
+      <h3>Chat with us</h3>
+      <p>Chat with us on <a href="https://wa.me/+8801883786892" target="_blank">WhatsApp</a></p>
+      <p>Or send us an <a href="mailto:ovibiswas54@gmail.com">Email</a></p>
+      <p>You can email us at <strong>ovibiswas54@gmail.com</strong> or WhatsApp us at <strong>01883786892</strong></p>
+      <button class="modal-close" onclick="closeModal()">Close</button>
+    </div>
+  `;
+
+  // Create and show modal
+  const modal = document.createElement('div');
+  modal.classList.add('modal-overlay', 'open');  // Add 'open' class to make the modal visible
+  modal.innerHTML = `<div class="modal-content">${contactMessage}</div>`;
+
+  // Append modal to the body
+  document.body.appendChild(modal);
+
+  // Close modal when clicking outside of the content
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+});
+
+// Function to close the modal
+function closeModal() {
+  const modal = document.querySelector('.modal-overlay');
+  if (modal) {
+    modal.classList.remove('open');
+    document.body.removeChild(modal);
+  }
+}
+
+// JavaScript to add category-specific links on featured products
+
+// This code extends the existing renderProducts function to add category links
+function extendRenderProducts() {
+  // Keep the original renderProducts function
+  const originalRenderProducts = renderProducts;
+  
+  // Override with extended functionality
+  renderProducts = function() {
+    // Call the original function first
+    originalRenderProducts();
+    
+    // Now add category links to each product card
+    document.querySelectorAll(".product-card").forEach(card => {
+      const productId = parseInt(card.querySelector(".add-to-cart-btn").dataset.id);
+      const product = products.find(p => p.id === productId);
+      
+      if (product && product.category && product.category.length > 0) {
+        // Create a category link element
+        const categoryLink = document.createElement("div");
+        categoryLink.className = "product-category";
+        
+        // Use the first category as the main category to link to
+        const mainCategory = product.category[0];
+        
+        categoryLink.innerHTML = `
+          <a href="category.html#${encodeURIComponent(mainCategory)}" class="category-tag">
+            ${mainCategory}
+          </a>
+        `;
+        
+        // Insert the category link before the "Add to Cart" button
+        const productInfo = card.querySelector(".product-info");
+        const addToCartBtn = productInfo.querySelector(".add-to-cart-btn");
+        productInfo.insertBefore(categoryLink, addToCartBtn);
+      }
+    });
+    
+    // Add a "See All" button at the end of the products grid
+    if (document.getElementById("productsGrid").children.length > 0) {
+      const viewAllLink = document.createElement("div");
+      viewAllLink.className = "view-all-card";
+      viewAllLink.innerHTML = `
+        <a href="category.html" class="view-all-link">
+          <div class="view-all-content">
+            <span class="view-all-icon">🔍</span>
+            <span class="view-all-text">View All Products</span>
+          </div>
+        </a>
+      `;
+      document.getElementById("productsGrid").appendChild(viewAllLink);
+    }
+  };
+}
+
+// Add code to handle category.html URL parameters
+function setupCategoryUrlHandling() {
+  // Add event listener to category links to set localStorage
+  document.querySelectorAll(".product-category a").forEach(link => {
+    link.addEventListener("click", function(e) {
+      const category = this.textContent.trim();
+      localStorage.setItem("selectedCategory", category);
+    });
+  });
+  
+  // Also handle the "Browse All Categories" and "See all products" links
+  document.querySelectorAll(".browse-categories-btn, .see-all-link").forEach(link => {
+    link.addEventListener("click", function() {
+      localStorage.removeItem("selectedCategory"); // Reset to show all products
+    });
+  });
+}
+const mobileBankingCards = document.querySelectorAll('.service-card');
+  mobileBankingCards.forEach(card => {
+    const serviceName = card.querySelector('.service-name');
+    if (serviceName && serviceName.textContent.includes('Mobile Banking')) {
+      // This is the mobile banking card
+      card.addEventListener('click', () => {
+        document.getElementById('banking-modal').style.display = 'flex';
+      });
+    }
+  });
+  
+  // Close modal when clicking on close button or outside
+  document.querySelector('.close-modal').addEventListener('click', () => {
+    document.getElementById('banking-modal').style.display = 'none';
+  });
+  
+  window.addEventListener('click', (event) => {
+    const modal = document.getElementById('banking-modal');
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+  
+  // Copy number functionality
+  document.querySelectorAll('.copy-btn').forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const number = button.getAttribute('data-number');
+      
+      // Copy to clipboard
+      navigator.clipboard.writeText(number)
+        .then(() => {
+          // Show notification
+          const notification = document.getElementById('copy-notification');
+          notification.classList.add('show');
+          
+          // Hide notification after 2 seconds
+          setTimeout(() => {
+            notification.classList.remove('show');
+          }, 2000);
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+    });
+  });
+
+  
+    // Initial rendering
+    renderProducts();
+  </script>
+  </body>
+  </html>
+  
