@@ -5,36 +5,694 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ovista Mini Super Mart</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  
-  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      line-height: 1.6;
+    }
+
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, #32bcce, #32bcce);
+      color: white;
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    header h1 a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .search-container {
+      display: flex;
+      background: white;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      flex: 1;
+      min-width: 250px;
+      max-width: 400px;
+    }
+
+    #searchInput {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    #searchBtn {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 15px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .header-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .owner-btn, #cartBtn {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .owner-btn:hover, #cartBtn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .auth-link {
+      color: white;
+      text-decoration: none;
+    }
+
+    #cartBtn {
+      position: relative;
+      font-size: 16px;
+    }
+
+    .cart-count {
+      background: #ff4444;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+      font-weight: bold;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    /* Mobile Navigation Optimization */
+    @media (max-width: 768px) {
+      header {
+        padding: 0.8rem;
+      }
+
+      .header-container {
+        gap: 0.8rem;
+      }
+
+      .header-top {
+        gap: 0.8rem;
+      }
+
+      header h1 {
+        font-size: 1.2rem;
+        order: 1;
+        flex: 1;
+      }
+
+      .search-container {
+        order: 3;
+        width: 100%;
+        min-width: unset;
+        max-width: unset;
+      }
+
+      .header-nav {
+        order: 2;
+        flex-shrink: 0;
+      }
+
+      .nav-buttons {
+        gap: 0.3rem;
+      }
+
+      .owner-btn, #cartBtn {
+        padding: 8px 12px;
+        font-size: 12px;
+        border-radius: 15px;
+      }
+
+      .profile-icon {
+        font-size: 14px;
+      }
+
+      .owner-btn .auth-link {
+        display: none;
+      }
+
+      .owner-btn[aria-label="Login or Sign Up"]:after {
+        content: "Login";
+        font-size: 12px;
+      }
+
+      .owner-btn[aria-label="Contact Us"]:after {
+        content: "Contact";
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-top {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      header h1 {
+        text-align: center;
+        order: 1;
+      }
+
+      .header-nav {
+        order: 2;
+        justify-content: center;
+      }
+
+      .search-container {
+        order: 3;
+      }
+
+      .owner-btn, #cartBtn {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+    }
+
+    /* Container and Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .breadcrumb {
+      margin-bottom: 2rem;
+      color: #666;
+    }
+
+    .breadcrumb a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    .breadcrumb .active {
+      color: #666;
+    }
+
+    .category-container {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .category-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        order: 2;
+      }
+      
+      .main-content {
+        order: 1;
+      }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      height: fit-content;
+    }
+
+    .sidebar h3 {
+      margin-bottom: 1rem;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .category-list {
+      list-style: none;
+    }
+
+    .category-list li {
+      margin-bottom: 0.5rem;
+    }
+
+    .category-list a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #666;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .category-list a:hover,
+    .category-list a.active {
+      background: #4CAF50;
+      color: white;
+    }
+
+    /* Main Content */
+    .main-content {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .product-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .sort-options {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sort-options select {
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    #productsCount {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    /* Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 0.8rem;
+      }
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-img {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 1rem;
+    }
+
+    .product-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .product-weight {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #4CAF50;
+      margin-bottom: 1rem;
+    }
+
+    .add-to-cart {
+      width: 100%;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .add-to-cart:hover {
+      background: #45a049;
+    }
+
+    /* Cart Sidebar */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      display: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 400px;
+      height: 100%;
+      background: white;
+      z-index: 201;
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 480px) {
+      .cart-sidebar {
+        width: 100%;
+        right: -100%;
+      }
+    }
+
+    .cart-sidebar.open {
+      right: 0;
+    }
+
+    .cart-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .close-cart {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    .empty-cart {
+      text-align: center;
+      color: #666;
+      padding: 2rem;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .item-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 5px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .item-details {
+      flex: 1;
+    }
+
+    .item-details h4 {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .item-price {
+      color: #4CAF50;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .item-quantity {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .item-quantity button {
+      background: #f0f0f0;
+      border: none;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .item-total {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .remove-item {
+      background: #ff4444;
+      color: white;
+      border: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .cart-footer {
+      padding: 1.5rem;
+      border-top: 1px solid #eee;
+      background: #f8f9fa;
+    }
+
+    .cart-subtotal,
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-total {
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #ddd;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    /* Success Message */
+    .success-message {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: #4CAF50;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      transform: translateX(400px);
+      transition: transform 0.3s ease;
+      z-index: 300;
+    }
+
+    .success-message.show {
+      transform: translateX(0);
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: white;
+      padding: 2rem 1rem 1rem;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-col h4 {
+      margin-bottom: 1rem;
+      color: #4CAF50;
+    }
+
+    .footer-col p {
+      margin-bottom: 0.5rem;
+      color: #ccc;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #555;
+      color: #ccc;
+    }
+
+    .no-products {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1><a href="index.html">Ovista Mini Super Mart</a></h1>
-    
-    <div class="search-container">
-      <input type="text" id="searchInput" placeholder="Search products..." aria-label="Search products">
-      <button id="searchBtn" aria-label="Search">🔍</button>
-    </div>
-    
-    <nav>
-      
-      
-      <button id="loginBtn" class="owner-btn" aria-label="Login or Sign Up">
-        <span class="profile-icon">📲</span>
-        <a href="login.html" class="auth-link">Login</a>
-      </button>
+    <div class="header-container">
+      <div class="header-top">
+        <h1><a href="index.html">Ovista Mini Super Mart</a></h1>
+        
+        <nav class="header-nav">
+          <div class="nav-buttons">
+            <button id="loginBtn" class="owner-btn" aria-label="Login or Sign Up">
+              <span class="profile-icon">📲</span>
+              <a href="login.html" class="auth-link">Login</a>
+            </button>
 
-      <!-- Contact Us Button -->
-    <button id="contactBtn" class="owner-btn" aria-label="Contact Us">
-      <span class="profile-icon">📞</span>
-    </button>
-      
-      <button id="cartBtn" aria-label="Open shopping cart">
-        🛒<span class="cart-count" id="cartCount">0</span>
-      </button>
-    </nav>
+            <button id="contactBtn" class="owner-btn" aria-label="Contact Us">
+              <span class="profile-icon">📞</span>
+            </button>
+            
+            <button id="cartBtn" aria-label="Open shopping cart">
+              🛒<span class="cart-count" id="cartCount">0</span>
+            </button>
+          </div>
+        </nav>
+        
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Search products..." aria-label="Search products">
+          <button id="searchBtn" aria-label="Search">🔍</button>
+        </div>
+      </div>
+    </div>
   </header>
 
   <main>
@@ -899,4 +1557,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
   </body>
   </html>
-  
